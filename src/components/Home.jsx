@@ -10,7 +10,7 @@ const Home = () => {
                 <div className="profile py-8 lg:py-20 xl:py-40 w-2/3 md:w-1/2 mx-auto flex justify-center items-center">
                     <img
                         className='w-2/3 lg:w-3/4 2xl:w-1/2 rounded-full border border-gray-600'
-                        src="./src/assets/profile.jpeg"
+                        src="/images/profile.jpeg"
                         alt="Profile picture of Avishkar Deogharia"
                     />
                 </div>
