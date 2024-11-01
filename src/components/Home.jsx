@@ -17,7 +17,7 @@ const Home = () => {
                 <div className="info-me w-[100vw] lg:w-2/3 flex flex-col justify-center text-center items-center lg:text-left lg:items-start p-6 gap-2 lg:gap-3 font-mono">
                     <p className='text-gray-400 w-full px-2 text-[25px] md:text-[30px] xl:text-[50px]'>Hi!! I Am</p>
                     <p className='text-gray-400 w-full px-2 text-[28px] md:text-[40px] xl:text-[60px] font-semibold'>Avishkar Deogharia</p>
-                    <p className='text-gray-400 w-full px-2 text-[25px] xl:text-[40px]'>Full Stack Web Developer</p>
+                    <p className='text-gray-400 w-full px-2 text-[25px] xl:text-[40px]'>MERN Stack Web Developer</p>
                     <div className="buttons flex flex-col md:flex-row gap-2 md:gap-4 pt-4 px-3">
                         <Link target='_blank' to="./Resume.pdf">
                             <button
