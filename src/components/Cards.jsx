@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 const Cards = (props) => {
    return (
       <>
-         <div className="card w-[95%] md:w-[80%] lg:w-[45%] hover:scale-105 bg-slate-800 hover:bg-slate-600 flex flex-col items-center p-4 rounded-xl text-white gap-4 cursor-pointer">
+         <div className="card w-[100%] md:w-[80%] lg:w-[45%] hover:scale-105 bg-slate-800 hover:bg-slate-600 flex flex-col items-center p-4 rounded-xl text-white gap-4 cursor-pointer">
             {/* <div className="image"> */}
-            <img className='w-[95%] h-[45%] ' src={props.img} alt="Image" />
+            <img className='w-[95%] h-[20vh] ' src={props.img} alt="Image" />
             {/* </div> */}
 
             <div className='Info  w-[95%]  flex flex-col gap-4'>
