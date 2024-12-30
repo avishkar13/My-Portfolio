@@ -1,174 +1,107 @@
-import React from 'react'
-import Navbar from './Navbar'
+import React, { useEffect, useState } from 'react';
+import Navbar from './Navbar';
 
 const Skills = () => {
+    const [progress, setProgress] = useState({
+        HTML: 0,
+        CSS: 0,
+        JavaScript: 0,
+        React: 0,
+        NextJS: 0,
+        NodeJS: 0,
+        ExpressJS: 0,
+        MongoDB: 0,
+        Mongoose: 0,
+        NextAuth: 0,
+        LocalStorage: 0,
+    });
+
+    useEffect(() => {
+        const targetProgress = {
+            HTML: 98,
+            CSS: 94,
+            JavaScript: 95,
+            React: 90,
+            NextJS: 65,
+            NodeJS: 92,
+            ExpressJS: 94,
+            MongoDB: 85,
+            Mongoose: 94,
+            NextAuth: 80,
+            LocalStorage: 92,
+        };
+
+        const interval = setInterval(() => {
+            setProgress((prev) => {
+                const newProgress = { ...prev };
+                let allFilled = true;
+                Object.keys(targetProgress).forEach((key) => {
+                    if (newProgress[key] < targetProgress[key]) {
+                        newProgress[key] += 2;
+                        allFilled = false;
+                    }
+                });
+                if (allFilled) clearInterval(interval);
+                return newProgress;
+            });
+        }, 70);
+    }, []);
+
+    const renderSkill = (name, width, description, image, color) => (
+        <div className="technology mb-4 flex items-center">
+            <img src={image} alt={name} className="w-6 h-6 mr-2 bg-white rounded-sm" />
+            <div className="flex-grow">
+                <div className="flex justify-between">
+                    <p className="font-semibold">{name}</p>
+                    <p className="text-gray-400 text-[12px] md:text-sm text-right">{description}</p>
+                </div>
+                <div className="w-full bg-gray-700 h-2 rounded-full mt-1">
+                    <div
+                        className="h-2 rounded-full"
+                        style={{
+                            width: `${progress[name]}%`,
+                            backgroundColor: color,
+                            transition: 'width 0.2s ease-in-out',
+                        }}
+                    ></div>
+                </div>
+            </div>
+        </div>
+    );
+
     return (
         <>
             <Navbar />
-            {/* <h2 className='font-bold font-serif text-white text-center text-2xl py-20 mb-0 md:mb-6 hidden md:block'>
-                <u>Tech stacks:</u></h2> */}
-            <div className="skill-container text-white w-[90vw]  mx-auto  my-24 flex flex-col gap-8 bg-red-30 p-1 md:p-2">
-                <div className="card w-full md:w-[80%] xl:w-[50%] bg-gray-800 rounded-lg shadow-lg p-6 text-white mx-auto">
+            <div className="skill-container text-white w-[90vw] mx-auto my-24 flex flex-col gap-8 bg-red-30 p-1 md:p-2">
+                <div className="card w-full md:w-[80%] xl:w-[50%] bg-gray-800 rounded-lg shadow-lg p-6 text-white mx-auto hover:scale-105 hover:bg-gray-900 transition-all duration-300 ease-in-out cursor-pointer">
                     <h2 className="text-2xl font-semibold mb-4 text-center">Frontend Tech Stack</h2>
-
-                    <div className="technology mb-4 flex items-center">
-                        <img src="/images/html.png" alt="HTML" className="w-6 h-6 mr-2 " />
-                        <div className="flex-grow">
-                            <div className="flex justify-between items-center">
-                                <p className="font-semibold">HTML</p>
-                                <p className="text-gray-400 text-[12px] md:text-sm text-right ">Markup language for structuring pages</p>
-                            </div>
-                            <div className="w-full bg-gray-700 h-2 rounded-full mt-1">
-                                <div className="bg-blue-500 h-2 rounded-full" style={{ width: '98%' }}></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="technology mb-4 flex  items-center">
-                        <img src="/images/css.png" alt="CSS" className="w-6 h-6 mr-2" />
-                        <div className="flex-grow">
-                            <div className="flex justify-between items-center">
-                                <p className="font-semibold">CSS</p>
-                                <p className="text-gray-400 md:text-sm text-[11px] text-right">For styling; using Tailwind for responsive design</p>
-                            </div>
-                            <div className="w-full bg-gray-700 h-2 rounded-full mt-1">
-                                <div className="bg-green-400 h-2 rounded-full" style={{ width: '94%' }}></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="technology mb-4 flex items-center">
-                        <img src="/images/js.png" alt="JavaScript" className="w-6 h-6 mr-2" />
-                        <div className="flex-grow">
-                            <div className="flex justify-between">
-                                <p className="font-semibold">JavaScript</p>
-                                <p className="text-gray-400 text-sm text-right">Core scripting for interactivity</p>
-                            </div>
-                            <div className="w-full bg-gray-700 h-2 rounded-full mt-1">
-                                <div className="bg-yellow-500 h-2 rounded-full" style={{ width: '90%' }}></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="frontend mb-4 flex items-center">
-                        <img src="/images/react.png" alt="React" className="w-6 h-6 mr-2" />
-                        <div className="flex-grow">
-                            <div className="flex justify-between">
-                                <p className="font-semibold">React</p>
-                                <p className="text-gray-400 text-sm text-right">Library for building UIs</p>
-                            </div>
-                            <div className="w-full bg-gray-700 h-2 rounded-full mt-1">
-                                <div className="bg-indigo-500 h-2 rounded-full" style={{ width: '85%' }}></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="technology mb-4 flex items-center">
-                        <img src="/images/next.png" alt="Next.js" className="w-6 h-6 mr-2 bg-white" />
-                        <div className="flex-grow">
-                            <div className="flex justify-between">
-                                <p className="font-semibold">Next.js</p>
-                                <p className="text-gray-400 text-[11px] md:text-sm text-right">Framework for server-rendered React</p>
-                            </div>
-                            <div className="w-full bg-gray-700 h-2 rounded-full mt-1">
-                                <div className="bg-purple-500 h-2 rounded-full" style={{ width: '65%' }}></div>
-                            </div>
-                        </div>
-                    </div>
+                    {renderSkill('HTML', 98, 'Markup language for structuring pages', 'images/html.png', '#e34c26')}
+                    {renderSkill('CSS', 94, 'For styling; using Tailwind for responsive design', 'images/css.png', '#264de4')}
+                    {renderSkill('JavaScript', 90, 'Core scripting for interactivity', 'images/js.png', '#f7df1e')}
+                    {renderSkill('React', 85, 'Library for building UIs', 'images/react.png', '#61dafb')}
+                    {renderSkill('NextJS', 65, 'Framework for server-rendered React', 'images/next.png', '#752768')}
                 </div>
 
-                <div className="card w-full md:w-[80%] xl:w-[50%] bg-gray-800 rounded-lg shadow-lg p-6 text-white mx-auto">
+                <div className="card w-full md:w-[80%] xl:w-[50%] bg-slate-800 rounded-lg shadow-lg p-6 text-white mx-auto hover:scale-105 hover:bg-gray-900 transition-all duration-300 ease-in-out cursor-pointer">
                     <h2 className="text-2xl font-semibold mb-4 text-center">Backend Tech Stack</h2>
-
-                    <div className="technology mb-4 flex items-center">
-                        <img src="/images/node.png" alt="HTML" className="w-6 h-6 mr-2 bg-white rounded-sm" />
-                        <div className="flex-grow">
-                            <div className="flex justify-between">
-                                <p className="font-semibold">Node.js</p>
-                                <p className="text-gray-400 text-[12px] md:text-sm text-right">JavaScript runtime for server-side</p>
-                            </div>
-                            <div className="w-full bg-gray-700 h-2 rounded-full mt-1">
-                                <div className="bg-green-500 h-2 rounded-full" style={{ width: '92%' }}></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="technology mb-4 flex items-center">
-                        <img src="/images/express.png" alt="CSS" className="w-6 h-6 mr-2 bg-white rounded-sm" />
-                        <div className="flex-grow">
-                            <div className="flex justify-between">
-                                <p className="font-semibold">Express.js</p>
-                                <p className="text-gray-400 text-[12px] md:text-sm text-right">Minimalist web framework for Node.js</p>
-                            </div>
-                            <div className="w-full bg-gray-700 h-2 rounded-full mt-1">
-                                <div className="bg-orange-500 h-2 rounded-full" style={{ width: '94%' }}></div>
-                            </div>
-                        </div>
-                    </div>
+                    {renderSkill('NodeJS', 92, 'JavaScript runtime for server-side', 'images/node.png', '#43853d')}
+                    {renderSkill('ExpressJS', 94, 'Minimalist web framework for Node.js', 'images/express.png', '#787878')}
                 </div>
 
-                <div className="card w-full md:w-[80%] xl:w-[50%] bg-gray-800 rounded-lg shadow-lg p-6 text-white mx-auto">
+                <div className="card w-full md:w-[80%] xl:w-[50%] bg-gray-800 rounded-lg shadow-lg p-6 text-white mx-auto hover:scale-105 hover:bg-gray-900 transition-all duration-300 ease-in-out cursor-pointer">
                     <h2 className="text-2xl font-semibold mb-4 text-center">Database Tech Stack</h2>
-
-                    <div className="technology mb-4 flex items-center">
-                        <img src="/images/mongodb.png" alt="HTML" className="w-6 h-6 mr-2 bg-white rounded-sm" />
-                        <div className="flex-grow">
-                            <div className="flex justify-between">
-                                <p className="font-semibold">MongoDB</p>
-                                <p className="text-gray-400  text-sm text-right">NoSQL database for data storage</p>
-                            </div>
-                            <div className="w-full bg-gray-700 h-2 rounded-full mt-1">
-                                <div className="bg-blue-800 h-2 rounded-full" style={{ width: '82%' }}></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="technology mb-4 flex items-center">
-                        <img src="/images/mongoose.png" alt="CSS" className="w-6 h-6 mr-2 bg-white rounded-sm" />
-                        <div className="flex-grow">
-                            <div className="flex justify-between">
-                                <p className="font-semibold">Mongoose</p>
-                                <p className="text-gray-400  text-sm text-right">ODM for MongoDB and Node.js</p>
-                            </div>
-                            <div className="w-full bg-gray-700 h-2 rounded-full mt-1">
-                                <div className="bg-orange-800 h-2 rounded-full" style={{ width: '94%' }}></div>
-                            </div>
-                        </div>
-                    </div>
+                    {renderSkill('MongoDB', 82, 'NoSQL database for data storage', 'images/mongodb.png', '#47a248')}
+                    {renderSkill('Mongoose', 94, 'ODM for MongoDB and Node.js', 'images/mongoose.png', '#880000')}
                 </div>
 
-                <div className="card w-full md:w-[80%] xl:w-[50%] bg-gray-800 rounded-lg shadow-lg p-6 text-white mx-auto">
+                <div className="card w-full md:w-[80%] xl:w-[50%] bg-gray-800 rounded-lg shadow-lg p-6 text-white mx-auto hover:scale-105 hover:bg-gray-900 transition-all duration-300 ease-in-out cursor-pointer">
                     <h2 className="text-2xl font-semibold mb-4 text-center">Other Tech Tools</h2>
-
-                    <div className="technology mb-4 flex items-center">
-                        <img src="/images/auth.jpg" alt="HTML" className="w-6 h-6 mr-2 bg-white rounded-sm" />
-                        <div className="flex-grow">
-                            <div className="flex justify-between">
-                                <p className="font-semibold">NextAuth.js</p>
-                                <p className="text-gray-400 text-[11px] md:text-sm text-right">Authentication for Next.js applications</p>
-                            </div>
-                            <div className="w-full bg-gray-700 h-2 rounded-full mt-1">
-                                <div className="bg-sky-600 h-2 rounded-full" style={{ width: '80%' }}></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="technology mb-4 flex items-center">
-                        <img src="/images/LS.jpg" alt="CSS" className="w-6 h-6 mr-2 bg-white rounded-sm" />
-                        <div className="flex-grow">
-                            <div className="flex justify-between">
-                                <p className="font-semibold">LocalStorage</p>
-                                <p className="text-gray-400 text-[11px] md:text-sm text-right">Client-side storage for web applications</p>
-                            </div>
-                            <div className="w-full bg-gray-700 h-2 rounded-full mt-1">
-                                <div className="bg-yellow-600 h-2 rounded-full" style={{ width: '82%' }}></div>
-                            </div>
-                        </div>
-                    </div>
+                    {renderSkill('NextAuth', 80, 'Authentication for Next.js applications', 'images/auth.jpg', '#ff6b6b')}
+                    {renderSkill('LocalStorage', 82, 'Client-side storage for web applications', 'images/LS.jpg', '#ff8c00')}
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Skills
+export default Skills;

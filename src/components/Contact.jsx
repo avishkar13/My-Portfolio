@@ -50,18 +50,18 @@ const Contact = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevents the default form submission behavior
-  
+    e.preventDefault(); 
+    
     const formErrors = validateForm(); // Validate the form data
     if (Object.keys(formErrors).length === 0) {
-      setIsSubmitting(true); // Disable the submit button
+      setIsSubmitting(true); 
       setErrors({});
 
       emailjs.sendForm(
-        'service_u9fj7m9', // Your service ID
-        'template_yvlprv9', // Your template ID
-        form.current, // The form ref
-        'sCR55zdmdvxewod9s' // Your public key
+        'service_u9fj7m9', //  service ID
+        'template_yvlprv9', // Template ID
+        form.current, 
+        'sCR55zdmdvxewod9s' // public key
       ).then((result) => {
         toast.success('Form Submitted Successfully!!', {
           position: "top-right",
@@ -73,7 +73,7 @@ const Contact = () => {
           progress: undefined,
           theme: "dark",
         });
-        setFormData({ // Reset form data after successful submission
+        setFormData({ 
           firstName: '',
           lastName: '',
           email: '',
@@ -171,7 +171,7 @@ return (
             />
           </div>
 
-          <button type="submit" value="send" disabled={isSubmitting} className="text-white w-fit cursor-pointer bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 my-4 flex items-center justify-center mx-auto text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+          <button type="submit" value="send" disabled={isSubmitting} className="text-white w-fit cursor-pointer bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm  sm:w-auto px-5 py-2.5 my-4 flex items-center justify-center mx-auto text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hover:scale-105 transition-all duration-400">Submit</button>
         </form>
 
       </div>
