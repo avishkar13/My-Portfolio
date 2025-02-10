@@ -32,13 +32,13 @@ const Projects = () => {
             link="https://task-flow-task-manager.vercel.app/"
             repo="https://github.com/avishkar13/TaskFlow"
           />
-          <Cards
+          {/* <Cards
             title="Spotify Clone - Online Music player"
             img="images/S.png"
             desc="This Spotify clone is a music streaming web app built using HTML, CSS, and JavaScript, allowing users to browse and play songs with a simple and clean interface."
             link="https://www.spotifyyyc.freewebhostmost.com/"
             repo="https://github.com/avishkar13/Spotify-Clone"
-          />
+          /> */}
           <Cards
             title="Todo-List"
             img="images/TD.png"
