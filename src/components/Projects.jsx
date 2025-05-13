@@ -14,7 +14,7 @@ const Projects = () => {
            <Cards
             title="Noggle - A Real Time Chat Application"
             img="images/Noggle.png"
-            desc="Noggle is a modern, secure chat app that supports real-time messaging, audio/video calls, and file sharing — built for seamless communication."
+            desc="Noggle is a modern, secure chat app that supports real-time messaging, and file sharing, user Authentication with a user friendly responsive design — built for seamless communication."
             link="https://noggle.onrender.com/"
             repo="https://github.com/avishkar13/Noggle"
           /> 
