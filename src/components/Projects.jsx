@@ -11,6 +11,14 @@ const Projects = () => {
           <u>My Projects</u>
         </h1>
         <div className="card-container flex gap-10 xl:gap-16 flex-wrap justify-center mb-10 md:mb-20">
+           <Cards
+            title="Noggle - A Real Time Chat Application"
+            img="images/Noggle.png"
+            desc="Noggle is a modern, secure chat app that supports real-time messaging, audio/video calls, and file sharing — built for seamless communication."
+            link="https://noggle.onrender.com/"
+            repo="https://github.com/avishkar13/Noggle"
+          /> 
+
           <Cards
             title="NexCart - An Online Shopping Platform"
             img="images/NC.png"
@@ -32,13 +40,7 @@ const Projects = () => {
             link="https://task-flow-task-manager.vercel.app/"
             repo="https://github.com/avishkar13/TaskFlow"
           />
-          {/* <Cards
-            title="Spotify Clone - Online Music player"
-            img="images/S.png"
-            desc="This Spotify clone is a music streaming web app built using HTML, CSS, and JavaScript, allowing users to browse and play songs with a simple and clean interface."
-            link="https://www.spotifyyyc.freewebhostmost.com/"
-            repo="https://github.com/avishkar13/Spotify-Clone"
-          /> */}
+          
           <Cards
             title="Todo-List"
             img="images/TD.png"
