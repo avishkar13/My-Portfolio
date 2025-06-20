@@ -1,4 +1,3 @@
-import React from 'react';
 import Navbar from './Navbar';
 import Cards from './Cards';
 
@@ -11,6 +10,13 @@ const Projects = () => {
           <u>My Projects</u>
         </h1>
         <div className="card-container flex gap-10 xl:gap-16 flex-wrap justify-center mb-10 md:mb-20">
+          <Cards
+            title="StoryCrafter - Ai powered Content Creator"
+            img="images/StoryCrafter.png"
+            desc="StoryCrafter is an AI-powered content creation platform designed for modern creators. From scriptwriting and thumbnail generation to SEO optimization and title suggestions, StoryCrafter helps you craft engaging content effortlessly — all in one place. Whether you're a YouTuber, storyteller, or digital marketer, this tool streamlines your creative process so you can focus on what matters most: your ideas."
+            link="https://storycrafter.onrender.com/"
+            repo="https://github.com/avishkar13/StoryCrafter "
+          />
            <Cards
             title="Noggle - A Real Time Chat Application"
             img="images/Noggle.png"
@@ -48,13 +54,7 @@ const Projects = () => {
             link="https://avishkar13.github.io/Todo-list/"
             repo="https://github.com/avishkar13/Todo-list"
           />
-          <Cards
-            title="Portfolio-Template"
-            img="images/PT.png"
-            desc="This portfolio website, created using HTML, CSS, and JavaScript, showcases projects and skills with a clean, responsive design for an engaging personal online presence."
-            link="https://avishkar13.github.io/Portfolio-Template/"
-            repo="https://github.com/avishkar13/Portfolio-Template "
-          />
+          
         </div>
       </div>
     </>

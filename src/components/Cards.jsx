@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 
 const Cards = (props) => {
@@ -27,6 +27,16 @@ const Cards = (props) => {
          </div>
       </>
    );
+};
+
+import PropTypes from 'prop-types';
+
+Cards.propTypes = {
+   img: PropTypes.string.isRequired,
+   title: PropTypes.string.isRequired,
+   desc: PropTypes.string.isRequired,
+   link: PropTypes.string.isRequired,
+   repo: PropTypes.string.isRequired,
 };
 
 export default Cards;
