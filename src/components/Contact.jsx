@@ -1,13 +1,11 @@
-import React, { useState,useRef } from 'react';
+import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { ToastContainer, toast } from 'react-toastify';
+import { motion } from 'framer-motion';
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from './Navbar'
 
 const Contact = () => {
-
   const form = useRef();
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -16,7 +14,6 @@ const Contact = () => {
     phone: '',
     message: '',
   });
-
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
@@ -28,13 +25,8 @@ const Contact = () => {
 
   const validateForm = () => {
     let formErrors = {};
-
-    if (!formData.firstName) {
-      formErrors.firstName = 'First name is required';
-    }
-    if (!formData.lastName) {
-      formErrors.lastName = 'Last name is required';
-    }
+    if (!formData.firstName) formErrors.firstName = 'First name is required';
+    if (!formData.lastName) formErrors.lastName = 'Last name is required';
     if (!formData.email) {
       formErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -45,139 +37,218 @@ const Contact = () => {
     } else if (!/^\d{10}$/.test(formData.phone)) {
       formErrors.phone = 'Phone number must be 10 digits';
     }
-
     return formErrors;
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
-    
-    const formErrors = validateForm(); // Validate the form data
+    e.preventDefault();
+    const formErrors = validateForm();
     if (Object.keys(formErrors).length === 0) {
-      setIsSubmitting(true); 
+      setIsSubmitting(true);
       setErrors({});
-
-      emailjs.sendForm(
-        'service_u9fj7m9', //  service ID
-        'template_yvlprv9', // Template ID
-        form.current, 
-        'sCR55zdmdvxewod9s' // public key
-      ).then((result) => {
-        toast.success('Form Submitted Successfully!!', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-        setFormData({ 
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          message: '',
-        });
-      }).catch((error) => {
-        toast.error('Form Submission Failed!', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
+      emailjs
+        .sendForm('service_u9fj7m9', 'template_yvlprv9', form.current, 'sCR55zdmdvxewod9s')
+        .then(() => {
+          toast.success('Form Submitted Successfully!', {
+            position: 'top-right',
+            autoClose: 3000,
+            theme: 'dark',
+          });
+          setFormData({
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            message: '',
+          });
+        })
+        .catch(() => {
+          toast.error('Form Submission Failed!', {
+            position: 'top-right',
+            autoClose: 3000,
+            theme: 'dark',
+          });
+        })
+        .finally(() => setIsSubmitting(false));
     } else {
-      setErrors(formErrors); // Set validation errors if any
+      setErrors(formErrors);
     }
   };
-  
 
-return (
-  <>
-    <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-    />
+  // Framer Motion Variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.15,
+        duration: 0.6,
+        ease: [0.4, 0.01, 0.2, 1],
+      },
+    }),
+  };
 
-    <Navbar />
-    <main className='py-24'>
-      <div className='text-white w-[95%] md:w-[80%]  max-h-[80vh] mx-auto p-6 rounded-xl flex flex-col gap-10 '>
-        <h1 className='text-center font-semibold font-serif md:text-xl lg:text-2xl'>Contact Form for work/genral Enquires</h1>
+  return (
+    <main className="min-h-screen flex items-center justify-center px-4 pb-12">
+      <ToastContainer theme="dark" />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        className="w-full max-w-7xl mx-auto p-6 sm:p-8 rounded-2xl flex flex-col lg:flex-row gap-8 bg-[#0a1f2c]/80 backdrop-blur-lg shadow-2xl border border-cyan-300/20"
+      >
+        {/* Form Section */}
+        <motion.div
+          className="w-full lg:w-2/3 flex flex-col gap-6 bg-[#0f0f0f]/60 rounded-2xl p-6 md:p-8 shadow-lg border border-cyan-300/20"
+        >
+          <motion.h1
+            variants={fadeInUp}
+            custom={0}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            className="text-center font-bold font-mono text-3xl md:text-4xl lg:text-5xl text-cyan-300 drop-shadow-lg mb-4"
+          >
+            Get in Touch
+          </motion.h1>
 
-        <form ref={form} className=" w-[90%] md:max-w-md mx-auto " onSubmit={handleSubmit}>
-          <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-5 group">
-              <input type="text"
-                name="firstName"
-                autoComplete='true'
-                id="floating_first_name"
-                className="block py-2.5 px-2 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                placeholder=" "
-                value={formData.firstName}
+          <motion.form
+            ref={form}
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-8"
+          >
+            <motion.div
+              className="grid md:grid-cols-2 gap-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false }}
+            >
+              {['firstName', 'lastName'].map((field, index) => (
+                <motion.div
+                  key={field}
+                  variants={fadeInUp}
+                  custom={index + 1}
+                  className="relative"
+                >
+                  <input
+                    type="text"
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleInputChange}
+                    className="w-full py-3 px-4 bg-[#0f0f0f]/80 text-white border border-cyan-300/30 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all duration-300"
+                    placeholder={field === 'firstName' ? 'First Name' : 'Last Name'}
+                  />
+                  {errors[field] && (
+                    <span className="text-red-500 text-sm mt-1">{errors[field]}</span>
+                  )}
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {['email', 'phone'].map((field, i) => (
+              <motion.div
+                key={field}
+                variants={fadeInUp}
+                custom={i + 3}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false }}
+                className="relative"
+              >
+                <input
+                  type={field === 'email' ? 'email' : 'tel'}
+                  name={field}
+                  value={formData[field]}
+                  onChange={handleInputChange}
+                  className="w-full py-3 px-4 bg-[#0f0f0f]/80 text-white border border-cyan-300/30 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all duration-300"
+                  placeholder={field === 'email' ? 'Email Address' : 'Phone Number'}
+                />
+                {errors[field] && (
+                  <span className="text-red-500 text-sm mt-1">{errors[field]}</span>
+                )}
+              </motion.div>
+            ))}
+
+            <motion.div
+              variants={fadeInUp}
+              custom={5}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false }}
+              className="relative"
+            >
+              <textarea
+                name="message"
+                rows="5"
+                value={formData.message}
                 onChange={handleInputChange}
-                required />
-              <label htmlFor="floating_first_name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First name</label>
-              {errors.firstName && <span className="text-red-500 text-sm">{errors.firstName}</span>}
-            </div>
-            <div className="relative z-0 w-full mb-5 group">
-              <input type="text" autoComplete='true' name="lastName" id="floating_last_name" className="block py-2.5 px-2 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required value={formData.lastName}
-                onChange={handleInputChange} />
-              <label htmlFor="floating_last_name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last name</label>
-              {errors.lastName && <span className="text-red-500 text-sm">{errors.lastName}</span>}
-            </div>
-          </div>
-          <div className="relative z-0 w-full mb-5 group">
-            <input type="email" autoComplete='true' name="email" id="floating_email" className="block py-2.5 px-2 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required value={formData.email}
-              onChange={handleInputChange} />
-            <label htmlFor="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
-            {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
-          </div>
-          {/* <div className="grid md:grid-cols-2 md:gap-6"> */}
-          <div className="relative z-0 w-full mb-5 group">
-            <input type="tel" autoComplete='true' pattern="[0-9]{10}" name="phone" id="floating_phone" className="block py-2.5 px-2 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required value={formData.phone}
-              onChange={handleInputChange} />
-            <label htmlFor="floating_phone" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone number(10 digits) </label>
-            {errors.phone && <span className="text-red-500 text-sm">{errors.phone}</span>}
-          </div>
-          {/* </div> */}
+                className="w-full p-4 text-base text-white bg-[#0f0f0f]/80 border border-cyan-300/30 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all duration-300"
+                placeholder="Your Message"
+              />
+            </motion.div>
 
-          <div className="max-w-full mx-auto">
-            <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-500 dark:text-white">Your message</label>
-            <textarea
-              name='message'
-              id="message"
-              rows="5"
-              className="block p-2.5 w-full text-sm text-white bg-slate-900 rounded-lg"
-              placeholder="Leave a comment..."
-              value={formData.message}
-              onChange={handleInputChange}
-            />
+            <motion.button
+              type="submit"
+              disabled={isSubmitting}
+              variants={fadeInUp}
+              custom={6}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false }}
+              className="w-full sm:w-fit mx-auto px-8 py-3 mt-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white border border-cyan-300 rounded-xl hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-md hover:scale-105 hover:shadow-cyan-500/50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? 'Submitting...' : 'Send Message'}
+            </motion.button>
+          </motion.form>
+        </motion.div>
+
+        {/* Social Links Section */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }}
+          className="w-full lg:w-1/3 flex flex-col justify-start gap-6 bg-[#0f0f0f]/60 rounded-2xl p-6 md:p-8 shadow-lg border border-cyan-300/20"
+        >
+          <motion.h2
+            variants={fadeInUp}
+            custom={0}
+            className="text-2xl md:text-3xl font-bold text-cyan-300 font-mono text-center"
+          >
+            Connect with Me
+          </motion.h2>
+
+          <div className="flex flex-col gap-4">
+            {[
+              { name: 'LinkedIn', href: 'https://www.linkedin.com/in/avishkar-deogharia', icon: 'images/linkedin.svg' },
+              { name: 'GitHub', href: 'https://github.com/avishkar13', icon: 'images/github.svg' },
+              { name: 'Instagram', href: 'https://www.instagram.com/_avishkar__13/', icon: 'images/instagram.svg' },
+            ].map((item, index) => (
+              <motion.a
+                key={item.name}
+                variants={fadeInUp}
+                custom={index + 1}
+                whileHover={{ scale: 1.05 }}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 bg-[#0f0f0f]/80 rounded-xl border border-cyan-300/30 shadow-md hover:scale-105 hover:bg-[#0f0f0f]/90 transition-all duration-300 backdrop-blur-lg group"
+              >
+                <img
+                  src={item.icon}
+                  alt={`${item.name} Icon`}
+                  className="w-10 h-10 invert group-hover:invert-0 group-hover:bg-cyan-300/20 rounded-md p-1 transition-all duration-300"
+                />
+                <span className="text-lg text-gray-200 font-mono group-hover:text-cyan-300">
+                  {item.name}
+                </span>
+              </motion.a>
+            ))}
           </div>
-
-          <button type="submit" value="send" disabled={isSubmitting} className="text-white w-fit cursor-pointer bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm  sm:w-auto px-5 py-2.5 my-4 flex items-center justify-center mx-auto text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hover:scale-105 transition-all duration-400">Submit</button>
-        </form>
-
-      </div>
+        </motion.div>
+      </motion.div>
     </main>
-  </>
-)
-}
+  );
+};
 
-export default Contact
+export default Contact;

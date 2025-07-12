@@ -63,3 +63,18 @@ input:-internal-autofill-selected {
   scrollbar-width: thin; /* Thin scrollbar */
   scrollbar-color: #2f2e2e #1a1a1a; /* Black thumb, dark gray track */
 }
+
+
+/* Hide scrollbar but still scrollable */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+
+html, body {
+  @apply no-scrollbar;
+}
