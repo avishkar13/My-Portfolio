@@ -78,7 +78,7 @@ const Skills = () => {
 
   return (
     <motion.div
-      className="skill-container text-white w-[90vw] mx-auto my-24 p-2 md:p-4"
+      className="skill-container text-white w-[95vw] sm:w-[90vw] mx-auto my-24 p-2 md:p-4"
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.2 }}

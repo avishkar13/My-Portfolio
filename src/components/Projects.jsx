@@ -1,26 +1,5 @@
-import { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
-
-const Cards = lazy(() => import('./Cards'));
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.4, 0.01, 0.2, 1] },
-  },
-};
+import Cards from './Cards';
 
 const Projects = () => {
   const projectData = [
@@ -29,7 +8,7 @@ const Projects = () => {
       img: 'images/StoryCrafter.png',
       desc: 'StoryCrafter is an AI-powered content creation platform designed for modern creators. From scriptwriting and thumbnail generation to SEO optimization and title suggestions, StoryCrafter helps you craft engaging content effortlessly.',
       link: 'https://storycrafter.onrender.com/',
-      repo: 'https://github.com/avishkar13/StoryCrafter ',
+      repo: 'https://github.com/avishkar13/StoryCrafter',
     },
     {
       title: 'Noggle - A Real Time Chat Application',
@@ -70,58 +49,45 @@ const Projects = () => {
 
   return (
     <main>
-      <Suspense
-        fallback={
-          <div className="min-h-[300px] bg-gray-900/60 rounded-2xl animate-pulse" />
-        }
-      >
-        <motion.div
-          className="projects-container w-[90vw] mx-auto my-24 p-2 md:p-4"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
+      <motion.div
+          className="projects-container w-[90vw] mx-auto my-24 p-2 md:p-4 min-h-screen"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: [0.4, 0.01, 0.2, 1] }}
         >
-          <div className="py-20">
-            <motion.h1
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: false }}
-              className="text-cyan-300 text-3xl md:text-6xl font-extrabold font-mono p-4 pb-10 text-center drop-shadow-lg"
-            >
-              My Projects
-            </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: false }}
+            className="text-cyan-300 text-3xl md:text-6xl font-extrabold font-mono p-4 pb-10 text-center drop-shadow-lg"
+          >
+            My Projects
+          </motion.h1>
 
-            <motion.div
-              className="card-container grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 xl:gap-12 justify-center mb-10 md:mb-20 bg-[#0a1f2c]/60 backdrop-blur-lg rounded-2xl shadow-2xl border border-cyan-300/30 p-6 md:p-8"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
-            >
-              {projectData.map((proj, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={cardVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: false, amount: 0.2 }}
-                >
-                  <Cards
-                    title={proj.title}
-                    img={proj.img}
-                    desc={proj.desc}
-                    link={proj.link}
-                    repo={proj.repo}
-                    cardClass="w-full h-auto min-h-[320px] max-w-[400px] mx-auto"
-                  />
-                </motion.div>
-              ))}
-            </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 xl:gap-12 justify-center mb-10 md:mb-20 bg-[#0a1f2c]/60 backdrop-blur-lg rounded-2xl shadow-2xl border border-cyan-300/30 p-6 md:p-8">
+            {projectData.map((proj, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className="w-full h-auto min-h-[320px] max-w-[400px] mx-auto hover:scale-105 hover:shadow-cyan-500/30 transition-all duration-300 ease-in-out"
+              >
+                <Cards
+                  title={proj.title}
+                  img={proj.img}
+                  desc={proj.desc}
+                  link={proj.link}
+                  repo={proj.repo}
+                  cardClass="w-full h-auto min-h-[320px] max-w-[400px] mx-auto"
+                />
+              </motion.div>
+            ))}
           </div>
         </motion.div>
-      </Suspense>
     </main>
   );
 };

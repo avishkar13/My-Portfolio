@@ -83,7 +83,7 @@ const Contact = () => {
       y: 0,
       transition: {
         delay: i * 0.15,
-        duration: 0.6,
+        duration: 0.3,
         ease: [0.4, 0.01, 0.2, 1],
       },
     }),

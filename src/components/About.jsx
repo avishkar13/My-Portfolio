@@ -46,7 +46,7 @@ const About = () => {
         viewport={{ once: false, amount: 0.3 }}
         className="Info w-[90vw] mx-auto lg:w-3/4 p-2 lg:p-4 bg-[#0a1f2c]/60 backdrop-blur-lg rounded-2xl shadow-xl border border-[#0088a9]/30"
       >
-        <h1 className="text-3xl font-bold text-cyan-300 mb-6 text-center">About Me</h1>
+        <h1 className="text-3xl font-bold text-cyan-300 my-6 text-center">About Me</h1>
         <Aboutinfo />
       </motion.div>
     </div>

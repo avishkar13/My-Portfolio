@@ -142,7 +142,7 @@ const Home = () => {
                                 Download Resume
                             </motion.button>
                         </Link>
-                        <Link to="/contact">
+                        <Link to="#contact">
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white border border-purple-400 hover:from-purple-600 hover:to-indigo-600 font-semibold rounded-xl text-base md:text-lg px-6 py-3 transition-all duration-300 shadow-lg"
