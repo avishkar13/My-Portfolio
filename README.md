@@ -41,7 +41,8 @@ This portfolio site is a comprehensive showcase of my abilities in web developme
 The portfolio is fully responsive, using media queries and flexible layouts to adapt to different screen sizes, from mobile devices to desktops. All components feature a modern design with attention to detail, including hover effects for enhanced interactivity.
 
 ## 🌐 Deployment
-The portfolio is deployed on Netlify. Updates are automatically reflected upon pushing changes to the main branch.
+The portfolio is deployed on Netlify. 
+- **Live Link**: [https://avishkar-deogharia-portfolio.netlify.app/](https://avishkar-deogharia-portfolio.netlify.app/)
 
 ## 📞 Contact
 Feel free to reach out with any questions or collaboration opportunities.
