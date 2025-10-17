@@ -4,6 +4,13 @@ import Cards from './Cards';
 const Projects = () => {
   const projectData = [
     {
+      title: 'Thoda Sukoon - Mental Health Platform',
+      img: 'images/TS.png',
+      desc: 'Thoda Sukoon is a mental health platform that provides resources, support, and a community for individuals seeking mental wellness. It features articles, guided meditations, and a safe space for users to share their experiences.',
+      link: 'https://thoda-sukoon-client.onrender.com/',
+      repo: 'https://github.com/avishkar13/Thoda-Sukoon-Client',
+    },
+    {
       title: 'StoryCrafter - AI powered Content Creator',
       img: 'images/StoryCrafter.png',
       desc: 'StoryCrafter is an AI-powered content creation platform designed for modern creators. From scriptwriting and thumbnail generation to SEO optimization and title suggestions, StoryCrafter helps you craft engaging content effortlessly.',
@@ -38,13 +45,7 @@ const Projects = () => {
       link: 'https://task-flow-task-manager.vercel.app/',
       repo: 'https://github.com/avishkar13/TaskFlow',
     },
-    {
-      title: 'Todo-List',
-      img: 'images/TD.png',
-      desc: 'This To-Do List app, built with HTML, CSS, and JS, helps users manage tasks with features like adding, editing, and deleting in a clean UI.',
-      link: 'https://avishkar13.github.io/Todo-list/',
-      repo: 'https://github.com/avishkar13/Todo-list',
-    },
+    
   ];
 
   return (

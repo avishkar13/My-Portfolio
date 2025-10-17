@@ -166,7 +166,7 @@ const Home = () => {
                             whileHover={{ scale: 1.05 }}
                             transition={{ type: 'spring', stiffness: 300 }}
                             className="h-60 w-60 md:w-72 md:h-72 rounded-full border-4 border-cyan-300 object-cover shadow-lg hover:shadow-cyan-500/50 transition-all duration-100 cursor-pointer"
-                            src="/images/profile.jpeg"
+                            src="/images/profile.jpg"
                             alt="Avishkar Deogharia"
                         />
                         {/* <div className="absolute inset-0 rounded-full border-2 border-cyan-300/50 opacity-0 group-hover:opacity-100 transition duration-300  pointer-events-none" /> */}
